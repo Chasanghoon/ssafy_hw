@@ -4,59 +4,75 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/* 
+ *  소금쟁이가 처음 뛸 때는 3칸 두번 째 2칸 세번쨰 1칸
+ *  연못 밖으로 나가거나 머물고 있는 소금쟁이와 충돌하면 죽는다.
+ *  N은 5~20
+ *  
+ *  출력 결과
+ *  #1 3
+ *  #2 4
+ *  #3 1
+ */
+
 public class Solution22 {
-	static int N, O;
-	public static void main(String[] args) throws FileNotFoundException {
+	public static void main(String[] args) throws FileNotFoundException{
 		System.setIn(new FileInputStream("res/Solution22.txt"));
-		Scanner sc = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);	
+		//			    상,하,좌,우
+		int[] dr = {-1,1,0,0};
+		int[] dc = {0,0,-1,1};
+		int T = sc.nextInt();	//테스트 케이스
 		
-		int T = sc.nextInt();	//테스트 케이스 수
-		
-		for(int test_case=1; test_case<=T; test_case++) {
-			int N=sc.nextInt();
-//			1. 데이터 로드
-			int [][] map = new int[N][N];
+		for(int test_case=1; test_case<=T; test_case++) { 
+			int N = sc.nextInt(); //연못 크기
+			int W = sc.nextInt(); //소금쟁이 수
+			int[][] arr = new int[W][3]; //소금쟁이
+			int[][] map = new int[N][N]; //연못
+			int AnswerW =W;
 			
-			O = sc.nextInt();
-			int[][] bug=new int[O][3];
-			for(int j=0; j < O; j++) {
-				bug[j][0]=sc.nextInt();
-				bug[j][1]=sc.nextInt();
-				bug[j][2]=sc.nextInt();
-			}
-			for(int r=0; r<O; r++) {
-				int cnt=3;
-				int len = map.length;
-				int row, col;
-				row = bug[r][0];
-				col = bug[r][1];
-				
-				int step=0;
-				
-				if(map[row][col]==1) {
-					System.out.println("#"+test_case + " " + (r+1));
-					break;
+			for (int i = 0; i < W; i++) {  //배열에 소금쟁이 데이터 입력받기
+				for (int j = 0; j < 3; j++) {
+					arr[i][j] = sc.nextInt();
 				}
 			}
-/*
- * for (int r = 1; r < N-1; r++) {
-				for (int c = 1; c < N-1; c++) {
-					big = 0;
-					small = 0;
-//					2.1 팔방을 검사해서 현재 좌표의 데이터보다 모두 큰지 또는 모두 작은지 검사	=> 카운트 세기
-					for (int i = 0; i < n; i++) {
-						nr = r+dr[i];
-						nc = c+dc[i];
-						if(matrix[nr][nc]>matrix[r][c]) {
-							small++;
-						}
-						if(matrix[nr][nc]<matrix[r][c]) {
-							big++;
-						}
+			
+
+			for (int i = 0; i < W; i++) {
+				int nr = arr[i][0];  //시작위치에 소금쟁이
+				int nc = arr[i][1];
+				int dir = arr[i][2];
+				
+				if(map[nr][nc]==1) { //시작 위치가 다른 소금쟁이 있다면 죽음
+					AnswerW--;
+					break;
+				}
+				
+				
+				for (int j = 3; j >0; j--) { //3칸->2칸->1칸 점프
+					if(dir ==1) 	 { nr += j*dr[dir-1]; }
+					else if(dir ==2) { nr += j*dr[dir-1]; }
+					else if(dir ==3) { nc += j*dc[dir-1]; }
+					else if(dir ==4) { nc += j*dc[dir-1]; }
+					else break; 
+					
+					if(nr< 0 || nr >= N || nc < 0 || nc >= N) { //연못 밖이라면 죽음
+						AnswerW--;
+						break;
+					} 
+					
+					if(map[nr][nc] == 1) { //위치에 다른 소금쟁이 있다면 죽음
+						AnswerW--;
+						break;
 					}
- */
+					if(j==1) {			//머무는 소금쟁이 표시
+						map[nr][nc]=1; 
+					}
+ 				}
+			}
+			
+			System.out.println("#"+test_case+" "+AnswerW);
 		}
-		
 	}
 
 }
