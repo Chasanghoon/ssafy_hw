@@ -1,8 +1,8 @@
-package com.ssafy.Product;
+package hwjava06_부울경_04반_차상훈;
 
-public class Tv extends Product1 {
+public class Tv extends Product {
 	public static void main(String[] args) {
-		Product1 Tv = new Product1();
-		System.out.println(Tv.toString());
+		Product tv = new Product();
+		System.out.println(tv.toString());
 	}
 }

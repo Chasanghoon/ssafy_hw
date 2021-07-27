@@ -31,6 +31,14 @@ public class ProductMgr extends Product {
 	 * (int i = 0; i < index; i++) { if(Refnumber.equals(refs[i].getRefnumber())) {
 	 * return i; } } } return -1; }
 	 */
+	/*public void SearchByTvnum(int num) {
+		for (int i = 0; i < tvs.length; i++) {
+			if (tvs[i].getTvnum() == num) {
+				System.out.println(tvs[i]);
+				return;
+			}
+		}
+	}*/
 
 	public Tv searchByTvnum(String tvnumber) {
 		int index = fineIndex(tvnumber);
@@ -109,7 +117,7 @@ public class ProductMgr extends Product {
 				newTvs[mIndex++] = tvs[i];
 			}
 		}
-		return (Tv[]) Arrays.copyOfRange(tvs, 0, mIndex);
+		return Arrays.copyOfRange(tvs, 0, mIndex);
 	}
 
 	/*
@@ -121,14 +129,13 @@ public class ProductMgr extends Product {
 
 	public int getTotalPrice() {
 		int num = 0;
-		int price1 = 0;
-		int price2=0;
-		int total=0;
+		int price = 0;
 		
 		for (int i = 0; i < index; i++) {
-			price2 = tvs[i].getTvnum() * tvs[i].getTvprice(); 
-			total += price2;
+			price += tvs[i].getTvprice();
+			num += tvs[i].getTvnum();
 		}
+		int total = price * num;
 		return total;
 	}
 }

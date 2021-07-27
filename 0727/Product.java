@@ -19,7 +19,6 @@ public class Product {
 	public Product() {}
 	
 	public Product(String tvnumber, String tvname, int tvprice, int tvnum, int tvinch, String tvDisplayType, String refnumber, String refname, int refprice, int refnum, String refW) {
-		super();
 		this.tvnumber = tvnumber;
 		this.tvname = tvname;
 		this.tvprice = tvprice;
