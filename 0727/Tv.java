@@ -6,6 +6,8 @@ public class Tv extends Product {
 		System.out.println(Tv.toString());
 	}
 	
+	//추가
+	
 	public Tv() {}
 	
 	public Tv(String tvnumber, String tvname, int tvprice, int tvnum, int tvinch, String tvDisplayType) {

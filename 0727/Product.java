@@ -1,6 +1,7 @@
 package hwjava06_부울경_04반_차상훈;
 
 public class Product {
+	//공통 
 	// TV의 정보를 표현
 	public String tvnumber;
 	public String tvname;
