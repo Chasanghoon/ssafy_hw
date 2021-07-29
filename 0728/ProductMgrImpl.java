@@ -157,8 +157,17 @@ public class ProductMgrImpl implements IProductMgr {
 		return total;
 	}
 
-	public void pricechange(String isbn, int quanaity) {
-		Product findprod = searchByIsbn(isbn);
-		findprod.setPrice(findprod.getPrice() + quanaity);
+//	public void pricechange(String isbn, int quanaity) {
+//		Product findprod = searchByIsbn(isbn);
+//		findprod.setPrice(findprod.getPrice() + quanaity);
+//	}
+	public void pricechange(String isbn, int price) {
+		int index = fineIndex(isbn);
+		if(isbn==null) {
+			throw new ISBNNotFoundException(isbn);
+		}else {
+			prods.get(index).setPrice(price);
+		}
+		
 	}
 }
