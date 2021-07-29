@@ -1,4 +1,4 @@
-package hwjava07_부울경_04반_차상훈;
+package com.ssafy.ws08.fin;
 
 public class ISBNNotFoundException extends RuntimeException {
 	public ISBNNotFoundException() {
