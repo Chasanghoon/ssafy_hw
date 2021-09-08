@@ -94,5 +94,16 @@ where year(hiredate) in
                where ename='ALLEN');
                
 -- 14. 부서별 급여의 합계를 출력하는 View를 작성하세요.
+create view sumsal as select if(grouping(deptno)=1, 'total',ifnull(deptno, '미배정')) as deptno,
+	   sum(sal) as sumSal
+from emp
+group by deptno with rollup;
+
+-- 합계 확인
+select deptno, sumSal from sumsal;
 
 -- 15. 14번에서 작성된 View를 이용하여 부서별 급여의 합계가 큰 1~3순위를 출력하세요.
+select deptno, sumsal,
+Rank() over(order by sumsal desc) as rk
+from sumsal
+where deptno IN (10,20,30);
