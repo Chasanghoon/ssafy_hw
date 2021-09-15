@@ -17,7 +17,7 @@ public class BOJ_1149_RGB거리 {
 	public static void main(String[] args) throws NumberFormatException, IOException {
 		input = new BufferedReader(new StringReader(src));
 		int tc = Integer.parseInt(input.readLine());
-		int arr[][] = new int[tc+1][3];	
+		int arr[][] = new int[tc][3];	
 		for (int i = 0; i < tc; i++) {			// N번째 집
 			StringTokenizer tokens = new StringTokenizer(input.readLine());
 			for (int j = 0; j < 3; j++) {		// 색상별
