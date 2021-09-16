@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-import sun.java2d.pipe.BufferedBufImgOps;
 /*
  * 크루스칼 알고리즘 - 그리디
  * 1. 모든 간선들의 가중치를 오름차순으로 정렬
@@ -33,17 +32,17 @@ public class Solution_D4_3124_최소스패닝트리 {
 		
 		@Override
 		public int compareTo(Edge o) {
-			//return this.weight - o.weight;	// 간선의 부호가 모두 같을 때
-			return Integer.compare(this.weight, o.weight);
+			return this.weight - o.weight;	// 간선의 부호가 모두 같을 때
+			//return Integer.compare(this.weight, o.weight);
 		}
 	}
 	
 	static int[] parents;	//부모원소를 관리(트리처럼 사용)
 	
 	private static void make() {
-		parents = new int[V];
+		parents = new int[V+1];
 		//모든 원소를 자신을 대표자로 만듬
-		for (int i = 0; i < V; i++) {
+		for (int i = 1; i <= V; i++) {
 			parents[i] = i;
 		}
 	}
@@ -68,37 +67,43 @@ public class Solution_D4_3124_최소스패닝트리 {
 	static Edge[] edgeList;
 	
 	public static void main(String[] args) throws NumberFormatException, IOException {
-		input = new BufferedReader(new StringReader(src));
+		//input = new BufferedReader(new StringReader(src));
 		int tc = Integer.parseInt(input.readLine());
 		
-		tokens = new StringTokenizer(input.readLine());
-		V = Integer.parseInt(tokens.nextToken());
-		E = Integer.parseInt(tokens.nextToken());
-		
-		
-		//간선 리스트 작성
-		edgeList = new Edge[E];
-		
-		for (int i = 0; i < E; i++) {
+		for (int i = 1; i <= tc; i++) {
+
 			tokens = new StringTokenizer(input.readLine());
-			int start = Integer.parseInt(tokens.nextToken());
-			int end = Integer.parseInt(tokens.nextToken());
-			int weight = Integer.parseInt(tokens.nextToken());
-			edgeList[i] = new Edge(start, end, weight);
-		}
-		
-		Arrays.sort(edgeList); 	//오름차순 정렬
-		
-		make();	// 모든 정점을 각각의 집합으로 만들고 출발
-		
-		//간선 하나씩 시도하며 트리 만들기
-		int cnt = 0;
-		for (Edge edge : edgeList) {
+			V = Integer.parseInt(tokens.nextToken());
+			E = Integer.parseInt(tokens.nextToken());
 			
+			
+			//간선 리스트 작성
+			edgeList = new Edge[E];
+			
+			for (int k = 0; k < E; k++) {
+				tokens = new StringTokenizer(input.readLine());
+				int start = Integer.parseInt(tokens.nextToken());
+				int end = Integer.parseInt(tokens.nextToken());
+				int weight = Integer.parseInt(tokens.nextToken());
+				edgeList[k] = new Edge(start, end, weight);
+			}
+			
+			Arrays.sort(edgeList); 	//오름차순 정렬
+			
+			make();	// 모든 정점을 각각의 집합으로 만들고 출발
+			
+			//간선 하나씩 시도하며 트리 만들기
+			int cnt = 0;
+            long result = 0;
+			for (Edge edge : edgeList) {
+				if(union(edge.start, edge.end)) {
+					result += edge.weight;
+					if(++cnt == V-1) break;	// 신장트리 완성
+				}
+			}
+			System.out.println("#"+ i + " " + result);
 		}
 	}
-	
-	
 
 	public static String src = 
 			"1\r\n" + 
