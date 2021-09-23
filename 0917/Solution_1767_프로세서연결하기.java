@@ -12,8 +12,8 @@ public class Solution_1767_프로세서연결하기{
 	static int[] dx = { 1, -1, 0, 0 };
 	static int[] dy = { 0, 0, 1, -1 };
 	static ArrayList<Core> ar;
-	static int maxCore = Integer.MIN_VALUE;
-	static int minLine = Integer.MAX_VALUE;
+	static int maxCore = Integer.MIN_VALUE>>2;
+	static int minLine = Integer.MAX_VALUE>>2;
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
