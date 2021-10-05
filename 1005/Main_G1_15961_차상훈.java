@@ -1,4 +1,4 @@
-package com.ssafy.main;
+package com.ssafy.Algorithm_26;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,16 +28,53 @@ public class Main_G1_15961_차상훈 {
 		
 		visited = new int[d+1];		// 먹은 스시 갯수를 저장할 배열
 		
+		System.out.println(slide());
+	}
+
+	static int slide() {
+		
+		int inSlide = 0, chance;
+		
+		for (int i = 0; i < k; i++) {
+			if(visited[arr[i]]==0) {		//k개의 슬라이드에 담기
+				inSlide++;
+			}
+			visited[arr[i]]++;
+		}
+		chance = inSlide;
+		for (int i = 1; i < n; i++) {
+            if (chance <= inSlide) {
+                if (visited[c] == 0) {
+                    chance = inSlide + 1;
+                } else {
+                    chance = inSlide;
+                }
+            }
+            
+            //슬라이드 이동 1
+            visited[arr[i - 1]]--;
+            if (visited[arr[i - 1]] == 0) {
+                inSlide--;
+            }
+            
+            //슬라이드 이동2
+            if (visited[arr[(i + k - 1) % n]] == 0) {
+                inSlide++;
+            }
+            visited[arr[(i + k - 1) % n]]++;
+        }
+        return chance;
+	
 	}
 
 	public static String src =
-			"8 30 4 30\r\n" + 
-			"7\r\n" + 
-			"9\r\n" + 
-			"7\r\n" + 
-			"30\r\n" + 
+			"8 50 4 7\r\n" + 
 			"2\r\n" + 
 			"7\r\n" + 
 			"9\r\n" + 
-			"25";
+			"25\r\n" + 
+			"7\r\n" + 
+			"9\r\n" + 
+			"7\r\n" + 
+			"30";
 }
